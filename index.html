@@ -2,107 +2,110 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-  <script type="text/javascript" src="js/eventemitter2.js"></script>
-  <script type="text/javascript" src="js/roslib.min.js"></script>
-  <meta name="GUI for Kraken 3.0" content="">
-  <meta name="Team AUV" content="">
-  <link rel="icon" href="favicon.ico">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <script type="text/javascript" src="js/eventemitter2.js"></script>
+    <script type="text/javascript" src="js/roslib.min.js"></script>
+    <meta name="GUI for Kraken 3.0" content="">
+    <meta name="Team AUV" content="">
+    <link rel="icon" href="favicon.ico">
 
-  <script>
-    // Connecting to ROS
-    // -----------------
-    var ros = new ROSLIB.Ros();
-    // If there is an error on the backend, an 'error' emit will be emitted.
-    ros.on('error', function(error) {
-      document.getElementById('connecting').style.display = 'none';
-      document.getElementById('connected').style.display = 'none';
-      document.getElementById('closed').style.display = 'none';
-      document.getElementById('error').style.display = 'inline';
-      console.log(error);
-    });
-    // Find out exactly when we made a connection.
-    ros.on('connection', function() {
-      console.log('Connection made!');
-      document.getElementById('connecting').style.display = 'none';
-      document.getElementById('error').style.display = 'none';
-      document.getElementById('closed').style.display = 'none';
-      document.getElementById('connected').style.display = 'inline';
-    });
-    ros.on('close', function() {
-      console.log('Connection closed.');
-      document.getElementById('connecting').style.display = 'none';
-      document.getElementById('connected').style.display = 'none';
-      document.getElementById('closed').style.display = 'inline';
-    });
-    // Create a connection to the rosbridge WebSocket server.
-    ros.connect('ws://localhost:9090');
-  </script>
+    <script>
+        // Connecting to ROS
+        // -----------------
+        var ros = new ROSLIB.Ros();
+        // If there is an error on the backend, an 'error' emit will be emitted.
+        ros.on('error', function(error) {
+            document.getElementById('connecting').style.display = 'none';
+            document.getElementById('connected').style.display = 'none';
+            document.getElementById('closed').style.display = 'none';
+            document.getElementById('error').style.display = 'inline';
+            console.log(error);
+        });
+        // Find out exactly when we made a connection.
+        ros.on('connection', function() {
+            console.log('Connection made!');
+            document.getElementById('connecting').style.display = 'none';
+            document.getElementById('error').style.display = 'none';
+            document.getElementById('closed').style.display = 'none';
+            document.getElementById('connected').style.display = 'inline';
+        });
+        ros.on('close', function() {
+            console.log('Connection closed.');
+            document.getElementById('connecting').style.display = 'none';
+            document.getElementById('connected').style.display = 'none';
+            document.getElementById('closed').style.display = 'inline';
+        });
+        // Create a connection to the rosbridge WebSocket server.
+        ros.connect('ws://localhost:9090');
 
-  <title>Kraken 3.0</title>
+    </script>
 
-  <!-- Bootstrap core CSS -->
-  <link href="css/bootstrap.min.css" rel="stylesheet">
+    <title>Kraken 3.0</title>
 
-  <!-- Custom styles for this template -->
-  <link href="css/dashboard.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/dashboard.css" rel="stylesheet">
 </head>
 
 <body>
 
-  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Team AUV</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">Dashboard</a></li>
+                    <li><a href="#">Settings</a></li>
+                    <li><a href="#">Log Out</a></li>
+                </ul>
+                <form class="navbar-form navbar-right">
+                    <input type="text" class="form-control" placeholder="Search...">
+                </form>
+            </div>
+        </div>
+    </nav>
+
     <div class="container-fluid">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">Team AUV</a>
-      </div>
-      <div id="navbar" class="navbar-collapse collapse">
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="#">Dashboard</a></li>
-          <li><a href="#">Settings</a></li>
-          <li><a href="#">Log Out</a></li>
-        </ul>
-        <form class="navbar-form navbar-right">
-          <input type="text" class="form-control" placeholder="Search...">
-        </form>
-      </div>
+        <div class="row">
+            <div class="col-sm-3 col-md-2 sidebar">
+                <ul class="nav nav-sidebar">
+                    <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
+                    <li><a href="#">Simulator</a></li>
+                </ul>
+            </div>
+        </div>
     </div>
-  </nav>
 
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-sm-3 col-md-2 sidebar">
-        <ul class="nav nav-sidebar">
-          <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
-          <li><a href="#">Simulator</a></li>
-        </ul>
-      </div>
+    <div class="jumbotron col-sm-offset-3 col-md-offset-2">
+        <div class="container-fluid">
+            <h1>Hello, world!</h1>
+            <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+            <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+        </div>
     </div>
-  </div>
 
-  <div class="jumbotron">
-    <div class="container">
-      <h1>Hello, world!</h1>
-      <p>I got nothing to show you peeps!</p>
-    </div>
-  </div>
-
-  <!-- Bootstrap core JavaScript
+    <!-- Bootstrap core JavaScript
     ================================================== -->
-  <!-- Placed at the end of the document so the pages load faster -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-  <script>
-    window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
-  </script>
-  <script src="js/bootstrap.min.js"></script>
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>
+        window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+
+    </script>
+    <script src="js/bootstrap.min.js"></script>
 </body>
 
 </html>
