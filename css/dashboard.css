@@ -43,7 +43,6 @@ body {
         top: 51px;
         bottom: 0;
         left: 0;
-        z-index: 1000;
         display: block;
         padding: 20px;
         overflow-x: hidden;
@@ -107,4 +106,10 @@ body {
 .placeholder img {
     display: inline-block;
     border-radius: 50%;
+}
+
+#rosconn_status_box {
+    position: absolute;
+    bottom: 0;
+    left: 0;
 }
